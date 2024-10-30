@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
    
-    axios.get('http://localhost:5000/favorites')
+    axios.get('https://weather-app-061a.onrender.com/favorites')
       .then((response) => setFavorites(response.data))
       .catch((error) => console.error("Error fetching favorites:", error));
 
@@ -43,7 +43,7 @@ const App = () => {
   const addFavorite = (cityData) => {
    
     if (!favorites.some(fav => fav.name === cityData.name)) {
-      axios.post('http://localhost:5000/favorites', cityData)
+      axios.post('https://weather-app-061a.onrender.com/favorites', cityData)
         .then((response) => setFavorites([...favorites, response.data]))
         .catch((error) => console.error("Error adding favorite:", error));
     } else {
@@ -54,7 +54,7 @@ const App = () => {
   const removeFavorite = (cityName) => {
     const favoriteCity = favorites.find(city => city.name === cityName);
     if (favoriteCity) {
-      axios.delete(`http://localhost:5000/favorites/${favoriteCity.id}`)
+      axios.delete(`https://weather-app-061a.onrender.com/favorites/${favoriteCity.id}`)
         .then(() => {
           setFavorites(favorites.filter(city => city.name !== cityName));
         })
@@ -65,7 +65,7 @@ const App = () => {
   const updateFavorite = (cityName, updatedData) => {
     const favoriteCity = favorites.find(city => city.name === cityName);
     if (favoriteCity) {
-      axios.patch(`http://localhost:5000/favorites/${favoriteCity.id}`, updatedData)
+      axios.patch(`https://weather-app-061a.onrender.com/favorites/${favoriteCity.id}`, updatedData)
         .then((response) => {
           setFavorites(
             favorites.map(city => 
